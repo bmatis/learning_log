@@ -19,12 +19,21 @@ def index(request):
 
     context = {}
 
-    # Get all topics for displaying in main nav
     try:
+        # Get all topics for displaying in main nav
         topics = Topic.objects.filter(owner=request.user).order_by('text')
-        context = {'topics': topics}
+        topic_count = len(topics)
+
+        entries = Entry.objects.filter(topic__owner=request.user).order_by('-date_added')
+        entry_count = len(entries)
+
+        context = {'topics': topics,
+                   'entries': entries,
+                   'topic_count': topic_count,
+                   'entry_count': entry_count,
+                   }
     except TypeError:
-        pass
+        print("TypeError occured when rendering index.")
 
     return render(request, 'learning_logs/index.html', context)
 

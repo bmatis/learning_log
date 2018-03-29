@@ -3,16 +3,78 @@
 {% block header %}
   <div class="jumbotron">
     <h1>Track your learning.<h1>
+      {% if user.is_authenticated %}
+        <p>Welcome back, {{ user.username }}!</p>
+      {% else %}
+        <a href="{% url 'users:register' %}" class="btn btn-primary btn-lg">
+          Register an account</a>
+        <a href="{% url 'users:login' %}" class="btn btn-default btn-lg">
+          Login</a>
+      {% endif %}
   </div>
 {% endblock header %}
 
 {% block content %}
-  <h2>
-    <a href="{% url 'users:register' %}">Register an account</a> to make your
-    own Learning Log, and list the topics you're learning about.
-  </h2>
-  <h2>
-    Whenever you learn something new about a topic, make an entry summarizing
-    what you've learned.
-  </h2>
+  <h3>
+    Make your own Learning Log.
+  </h3>
+  <p>
+     List the topics you're learning about, and whenever you learn something
+     new, make an entry summarizing what you've learned.
+  </p><br>
+
+  {% if user.is_authenticated %}
+
+  <div class="row">
+    <div class="col-md-3">
+      <h4>Stats</h4>
+      <div class="well text-center">
+        <h4><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Topics</h4>
+        <h1>{{ topic_count }}</h1>
+      </div>
+
+      <div class="well text-center">
+        <h4><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Entries</h4>
+        <h1>{{ entry_count }}</h1>
+      </div>
+
+    </div>
+
+    <div class="col-md-9">
+      <h4>All Entries</h4>
+      <div class="well">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Topic</th>
+              <th>Text</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for entry in entries %}
+              <tr>
+                <td>{{ entry.date_added }}</td>
+                <td>{{ entry.topic }}</td>
+                <td>{{ entry }}</td>
+                <td>
+                  <a href="{% url 'learning_logs:edit_entry' entry.id %}" class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    Edit
+                  </a>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="4">No entries yet.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+  </div>
+
+  {% endif %}
 {% endblock content %}
