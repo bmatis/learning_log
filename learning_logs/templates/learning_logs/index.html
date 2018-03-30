@@ -56,7 +56,11 @@
             {% for entry in entries %}
               <tr>
                 <td>{{ entry.date_added }}</td>
-                <td>{{ entry.topic }}</td>
+                <td>
+                  <a href="{% url 'learning_logs:topic' entry.topic.id %}" class="label label-info">
+                    {{ entry.topic }}
+                  </a>
+                </td>
                 <td>{{ entry }}</td>
                 <td>
                   <a href="{% url 'learning_logs:edit_entry' entry.id %}" class="btn btn-default btn-xs">
