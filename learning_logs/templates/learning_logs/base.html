@@ -89,7 +89,7 @@
 
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
-              <li><a>Hello, {{ user.username }}</a></li>
+              <li><p class="navbar-text">Hello, {{ user.username }}</p></li>
               <li><a href="{% url 'users:logout' %}">Logout</a></li>
             {% else %}
               <li><a href="{% url 'users:register' %}">Register</a></li>
