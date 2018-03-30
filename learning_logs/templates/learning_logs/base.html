@@ -12,8 +12,34 @@
     {% bootstrap_javascript %}
 
     <style>
-      body{
+      body {
         padding-top: 40px
+      }
+
+      /* Sticky footer styles
+      -------------------------------------------------- */
+      html {
+        position: relative;
+        min-height: 100%;
+      }
+      body {
+        /* Margin bottom by footer height */
+        margin-bottom: 60px;
+      }
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 60px;
+        line-height: 60px; /* Vertically center the text there */
+        background-color: #222;
+      }
+      .footer span {
+        color: #aaa
+      }
+      .footer span a {
+        color: #ddd
       }
     </style>
   </head>
@@ -83,4 +109,11 @@
 
     </div> <!-- /container -->
   </body>
+
+  <footer class="footer">
+    <div class="container">
+      <span>Built by <strong>Brian J. Matis</strong> - Adapted from lessons in
+      <a href="http://a.co/b10xLLE">Python Crash Course</a></span>
+    </div>
+  </footer>
 </html>
