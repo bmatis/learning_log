@@ -142,6 +142,9 @@ if cwd == '/app' or cwd[:4] == '/tmp':
         'default': dj_database_url.config(default='postgres://local-host')
     }
 
+    # Redirect http requests to https
+    SECURE_SSL_REDIRECT =  True
+
     # Honor the 'X-Forwarded-Proto' header for request.is_secure().
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
