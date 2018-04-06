@@ -1,4 +1,4 @@
-# learning_log
+# Learning Log
 Django-based web app for journaling about what you've learned in different
 topics.
 
